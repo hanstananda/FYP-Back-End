@@ -34,7 +34,8 @@ class ClassifySnakeRequestViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         # Call classifier here
-        image = serializer.validated_data['image']
+        image = serializer.validated_data['snake_image']
         print(image)
-        classification = 1
+        classification_id = 1
+        classification = SnakeInfo.objects.get(id=classification_id)
         serializer.save(classification=classification)

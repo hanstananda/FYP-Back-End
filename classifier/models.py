@@ -7,6 +7,9 @@ from django.db import models
 class SnakeImage(models.Model):
     image = models.ImageField()
 
+    def __str__(self):
+        return self.image.__str__()
+
 
 class SnakeInfo(models.Model):
     name = models.CharField(max_length=50)
@@ -31,3 +34,6 @@ class ClassifySnakeRequest(models.Model):
         null=True,
         on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return f"{self.snake_image.__str__()} classified as {self.classification.__str__()}"
