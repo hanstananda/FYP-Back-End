@@ -4,6 +4,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 
+from classifier.classifier import ClassifierModel
 from classifier.models import SnakeInfo, ClassifySnakeRequest, SnakeImage
 from classifier.serializers import SnakeInfoSerializer, ClassifySnakeRequestSerializer, SnakeImageSerializer
 
@@ -31,6 +32,7 @@ class ClassifySnakeRequestViewSet(viewsets.ModelViewSet):
 
     queryset = ClassifySnakeRequest.objects.all()
     serializer_class = ClassifySnakeRequestSerializer
+    classifier = ClassifierModel()
 
     def perform_create(self, serializer):
         # Call classifier here

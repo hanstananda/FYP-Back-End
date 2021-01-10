@@ -3,15 +3,22 @@ from rest_framework import serializers
 from classifier.models import SnakeInfo, ClassifySnakeRequest, SnakeImage
 
 
-class SnakeInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SnakeInfo
-        fields = '__all__'
-
-
 class SnakeImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = SnakeImage
+        fields = '__all__'
+
+
+class SnakeImageReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SnakeImage
+
+
+class SnakeInfoSerializer(serializers.ModelSerializer):
+    image = SnakeImageSerializer()
+
+    class Meta:
+        model = SnakeInfo
         fields = '__all__'
 
 
