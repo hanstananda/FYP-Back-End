@@ -10,6 +10,10 @@ from PIL import Image
 class ClassifierModel:
     _IMAGE_HEIGHT: int = 224
     _IMAGE_WIDTH: int = 224
+    # Must change the following if classes changes!
+    class_dictionary = {'Ahaetulla prasine': 0, 'Bungarus multicinctus': 1, 'Chrysopelea ornata': 2,
+                        'Dendrelaphis pictus': 3, 'Psammodynastes pulverulentus': 4, 'Ptyas mucosa': 5,
+                        'Rhabdophis subminiatus': 6, 'Trimeresurus albolabris': 7, 'Trimeresurus stejnegeri': 8}
 
     def __init__(self,
                  logger_name: str = 'ML',
