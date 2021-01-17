@@ -9,6 +9,10 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 import numpy as np
 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+
 from classifier.classifier import ClassifierModel
 from classifier.models import SnakeInfo, ClassifySnakeRequest, SnakeImage
 from classifier.serializers import SnakeInfoSerializer, ClassifySnakeRequestSerializer, SnakeImageSerializer
@@ -49,7 +53,7 @@ class ClassifySnakeRequestViewSet(viewsets.ModelViewSet):
 
         top_1_class = np.argmax(predictions)
         top_1_species = (list(self.classifier.class_dictionary.keys())[
-                  list(self.classifier.class_dictionary.values()).index(top_1_class)])
+            list(self.classifier.class_dictionary.values()).index(top_1_class)])
         logging.warning(f"Top 1 species = {top_1_species}")
 
         classification_id = 1
@@ -61,3 +65,18 @@ class ClassifySnakeRequestViewSet(viewsets.ModelViewSet):
 
         classification = SnakeInfo.objects.get(id=classification_id)
         serializer.save(classification=classification)
+
+
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email
+        })
