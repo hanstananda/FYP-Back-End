@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+import random
 
 from PIL import Image
 from django.shortcuts import render
@@ -14,8 +15,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
 from classifier.classifier import ClassifierModel
-from classifier.models import SnakeInfo, ClassifySnakeRequest, SnakeImage
-from classifier.serializers import SnakeInfoSerializer, ClassifySnakeRequestSerializer, SnakeImageSerializer
+from classifier.serializers import *
 
 
 class SnakeInfoViewSet(viewsets.ModelViewSet):
@@ -25,7 +25,7 @@ class SnakeInfoViewSet(viewsets.ModelViewSet):
     """
 
     queryset = SnakeInfo.objects.all()
-    serializer_class = SnakeInfoSerializer
+    serializer_class = SnakeInfoReadSerializer
 
 
 class SnakeImageViewSet(viewsets.ModelViewSet):
@@ -65,6 +65,21 @@ class ClassifySnakeRequestViewSet(viewsets.ModelViewSet):
 
         classification = SnakeInfo.objects.get(id=classification_id)
         serializer.save(classification=classification)
+
+
+class SnakeImageRandomViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SnakeImage.objects.all()
+    serializer_class = SnakeImageSerializer
+
+    def list(self, request, *args, **kwargs):
+        instance = random.choice(self.queryset)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+
+class ExpertClassificationViewSet(viewsets.ModelViewSet):
+    queryset = ExpertClassification.objects.all()
+    serializer_class = ExpertClassificationSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):

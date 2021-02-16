@@ -37,3 +37,16 @@ class ClassifySnakeRequest(models.Model):
 
     def __str__(self):
         return f"{self.snake_image.__str__()} classified as {self.classification.__str__()}"
+
+
+class ExpertClassification(models.Model):
+    snake_image = models.ForeignKey(SnakeImage, on_delete=models.CASCADE)
+    classification = models.ForeignKey(
+        SnakeInfo,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"{self.snake_image.__str__()} classified as {self.classification.__str__()}"

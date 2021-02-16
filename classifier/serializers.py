@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from classifier.models import SnakeInfo, ClassifySnakeRequest, SnakeImage
+from classifier.models import *
 
 
 class SnakeImageSerializer(serializers.ModelSerializer):
@@ -9,12 +9,12 @@ class SnakeImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SnakeImageReadSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SnakeImage
-
-
 class SnakeInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SnakeInfo
+
+
+class SnakeInfoReadSerializer(serializers.ModelSerializer):
     image = SnakeImageSerializer()
 
     class Meta:
@@ -25,4 +25,10 @@ class SnakeInfoSerializer(serializers.ModelSerializer):
 class ClassifySnakeRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassifySnakeRequest
+        fields = '__all__'
+
+
+class ExpertClassificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExpertClassification
         fields = '__all__'

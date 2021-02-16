@@ -19,13 +19,15 @@ from rest_framework.routers import DefaultRouter
 from django.conf.urls.static import static
 
 from back_end import settings
-from classifier.views import SnakeInfoViewSet, ClassifySnakeRequestViewSet, SnakeImageViewSet, CustomAuthToken
+from classifier.views import *
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'snake_info', SnakeInfoViewSet)
 router.register(r'snake_image', SnakeImageViewSet)
 router.register(r'snake_classification', ClassifySnakeRequestViewSet)
+router.register(r'expert_classification', ExpertClassificationViewSet)
+router.register(r'random_snake_image', SnakeImageRandomViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
