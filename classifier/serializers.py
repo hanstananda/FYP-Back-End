@@ -29,7 +29,7 @@ class ClassifySnakeRequestSerializer(serializers.ModelSerializer):
 
 
 class ClassifySnakeRequestReadSerializer(serializers.ModelSerializer):
-    classification = SnakeInfoReadSerializer
+    classification = SnakeInfoReadSerializer()
 
     class Meta:
         model = ClassifySnakeRequest
@@ -49,7 +49,7 @@ class SnakeReportSerializer(serializers.ModelSerializer):
 
 
 class SnakeReportReadSerializer(serializers.ModelSerializer):
-    request = ClassifySnakeRequestReadSerializer
+    request = ClassifySnakeRequestReadSerializer()
 
     class Meta:
         model = SnakeReport

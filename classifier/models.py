@@ -15,6 +15,7 @@ class SnakeInfo(models.Model):
     name = models.CharField(max_length=50)
     latin_name = models.CharField(max_length=50, unique=True)
     description = models.TextField()
+    short_desc = models.TextField()
     image = models.ForeignKey(
         SnakeImage,
         blank=True,
