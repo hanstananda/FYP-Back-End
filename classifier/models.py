@@ -53,7 +53,12 @@ class ExpertClassification(models.Model):
 
 
 class SnakeReport(models.Model):
-    request = ClassifySnakeRequest
+    request = models.ForeignKey(
+        ClassifySnakeRequest,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE
+    )
     latitude = models.FloatField()
     longitude = models.FloatField()
 
