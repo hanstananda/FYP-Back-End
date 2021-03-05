@@ -53,20 +53,21 @@ class ClassifySnakeRequestViewSet(viewsets.ModelViewSet):
         image_field = serializer.validated_data['snake_image']
         image = Image.open(image_field.image.path)
 
-        predictions = self.classifier.predict(image)
-        logging.debug(f"predictions = {predictions}")
+        classification_id = 10
+        if self.classifier.base_predict_is_snake(image):
+            # Is a snake
+            predictions = self.classifier.predict(image)
+            logging.debug(f"predictions = {predictions}")
 
-        top_1_class = np.argmax(predictions)
-        top_1_species = (list(self.classifier.class_dictionary.keys())[
-            list(self.classifier.class_dictionary.values()).index(top_1_class)])
-        logging.warning(f"Top 1 species = {top_1_species}")
+            top_1_class = np.argmax(predictions)
+            top_1_species = (list(self.classifier.class_dictionary.keys())[
+                list(self.classifier.class_dictionary.values()).index(top_1_class)])
+            logging.warning(f"Top 1 species = {top_1_species}")
+            snake_class = SnakeInfo.objects.filter(latin_name=top_1_species).first()
 
-        classification_id = 1
-
-        snake_class = SnakeInfo.objects.filter(latin_name=top_1_species).first()
-        if snake_class is not None:
-            classification_id = snake_class.id
-        print(snake_class)
+            if snake_class is not None:
+                classification_id = snake_class.id
+            logging.info(f"Found prediction match to {snake_class}")
 
         classification = SnakeInfo.objects.get(id=classification_id)
         serializer.save(classification=classification)
