@@ -105,3 +105,8 @@ class CustomAuthToken(ObtainAuthToken):
 class SnakeReportViewSet(viewsets.ModelViewSet):
     queryset = SnakeReport.objects.all()
     serializer_class = SnakeReportSerializer
+
+
+class SnakeReportReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SnakeReport.objects.all()
+    serializer_class = SnakeReportReadSerializer

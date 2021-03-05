@@ -28,6 +28,14 @@ class ClassifySnakeRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ClassifySnakeRequestReadSerializer(serializers.ModelSerializer):
+    classification = SnakeInfoReadSerializer
+
+    class Meta:
+        model = ClassifySnakeRequest
+        fields = '__all__'
+
+
 class ExpertClassificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExpertClassification
@@ -35,6 +43,14 @@ class ExpertClassificationSerializer(serializers.ModelSerializer):
 
 
 class SnakeReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SnakeReport
+        fields = '__all__'
+
+
+class SnakeReportReadSerializer(serializers.ModelSerializer):
+    request = ClassifySnakeRequestReadSerializer
+
     class Meta:
         model = SnakeReport
         fields = '__all__'

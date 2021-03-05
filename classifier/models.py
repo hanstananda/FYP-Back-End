@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -34,6 +34,9 @@ class ClassifySnakeRequest(models.Model):
         null=True,
         on_delete=models.CASCADE
     )
+    date_created = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self):
         return f"{self.snake_image.__str__()} classified as {self.classification.__str__()}"
@@ -61,6 +64,9 @@ class SnakeReport(models.Model):
     )
     latitude = models.FloatField()
     longitude = models.FloatField()
+    date_created = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self):
         return f"{self.request.__str__()} found at {self.latitude}, {self.longitude}"
