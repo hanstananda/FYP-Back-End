@@ -28,6 +28,8 @@ router.register(r'snake_image', SnakeImageViewSet)
 router.register(r'snake_classification', ClassifySnakeRequestViewSet)
 router.register(r'expert_classification', ExpertClassificationViewSet)
 router.register(r'random_snake_image', SnakeImageRandomViewSet)
+router.register(r'snake_list', SnakeInfoReadOnlyViewSet)
+router.register(r'snake_report', SnakeReportViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

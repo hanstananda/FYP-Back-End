@@ -28,6 +28,11 @@ class SnakeInfoViewSet(viewsets.ModelViewSet):
     serializer_class = SnakeInfoReadSerializer
 
 
+class SnakeInfoReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SnakeInfo.objects.all().exclude(name="Not Identified")
+    serializer_class = SnakeInfoReadSerializer
+
+
 class SnakeImageViewSet(viewsets.ModelViewSet):
     queryset = SnakeImage.objects.all()
     serializer_class = SnakeImageSerializer
@@ -95,3 +100,8 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'email': user.email
         })
+
+
+class SnakeReportViewSet(viewsets.ModelViewSet):
+    queryset = SnakeReport.objects.all()
+    serializer_class = SnakeReportSerializer

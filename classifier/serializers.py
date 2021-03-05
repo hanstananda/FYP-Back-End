@@ -32,3 +32,9 @@ class ExpertClassificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExpertClassification
         fields = '__all__'
+
+
+class SnakeReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SnakeReport
+        fields = '__all__'

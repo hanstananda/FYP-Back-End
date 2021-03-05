@@ -50,3 +50,12 @@ class ExpertClassification(models.Model):
 
     def __str__(self):
         return f"{self.snake_image.__str__()} classified as {self.classification.__str__()}"
+
+
+class SnakeReport(models.Model):
+    request = ClassifySnakeRequest
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return f"{self.request.__str__()} found at {self.latitude}, {self.longitude}"
