@@ -70,3 +70,9 @@ The following are the default values used for the classifier:
                         'Rhabdophis subminiatus': 7, 'Trimeresurus albolabris': 8, 'Malayopython reticulatus': 4}
 ```
 
+### Deployment Notes 
+
+This project should be able to be deployed in any servers that satisfies the prerequisites mentioned above. 
+The deployment methods follows the exact methods to run the server. 
+This backend server has been tested to run smoothly with Windows 10 and GCP Compute Engine running Ubuntu 20.10
+
