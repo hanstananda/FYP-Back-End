@@ -1,0 +1,11 @@
+[Unit]
+Description=FYP Backend Server
+
+[Service]
+User=hanstananda
+WorkingDirectory=/home/hanstananda/FYP-Back-End
+ExecStart=/home/hanstananda/FYP-Back-End/env_backend/bin/python manage.py runserver 0.0.0.0:8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

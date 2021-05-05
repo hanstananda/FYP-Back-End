@@ -56,3 +56,17 @@ If the database and model have been set up, then the system can be started direc
 ```bash
 python manage.py runserver
 ```
+
+### Model Notes
+When changing the model, one may need to change the default parameters under `classifier/classifier.py`. 
+The following are the default values used for the classifier: 
+
+```python
+    _IMAGE_HEIGHT: int = 224
+    _IMAGE_WIDTH: int = 224
+    # Must change the following if classes changes!
+    class_dictionary = {'Ahaetulla prasine': 0, 'Bungarus multicinctus': 1, 'Chrysopelea ornate': 2,
+                        'Dendrelaphis pictus': 3, 'Psammodynastes pulverulentus': 5, 'Ptyas mucosa': 6,
+                        'Rhabdophis subminiatus': 7, 'Trimeresurus albolabris': 8, 'Malayopython reticulatus': 4}
+```
+
